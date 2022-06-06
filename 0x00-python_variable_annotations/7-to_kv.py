@@ -6,7 +6,7 @@ The first element of the tuple is the string k. The second element is the square
 from typing import Union, Tuple
 
 
-def to_kv(k: str, v: Union[int, float]) -> Tuple[str, fl]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """Funtion that takes a strin and an int or float and returns a tuple"""
     new_tuple: tuple = (k, v*v)
     return new_tuple
