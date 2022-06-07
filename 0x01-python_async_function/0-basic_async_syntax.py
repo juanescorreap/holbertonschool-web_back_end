@@ -9,7 +9,7 @@ import asyncio
 import random
 
 
-async def wait_random(max_delay=10):
+async def wait_random(max_delay: int = 10) -> float:
     """Function that takes a number as maximum delay to print a
     random number"""
     random_number = random.uniform(0, max_delay)
