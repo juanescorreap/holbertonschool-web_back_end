@@ -1,23 +1,18 @@
 #!/usr/bin/env python3
-"""This module contains the corrutine wait_random"""
+"""
+Take the code from wait_n and alter it into a new function task_wait_n.
+The code is nearly identical to wait_n except task_wait_random
+is being called
+"""
 import asyncio
-import random
 from typing import List
-
-
 task_wait_random = __import__('3-tasks').task_wait_random
 
 
 async def task_wait_n(n: int, max_delay: int) -> List[float]:
-    """waits for a random delay between 0 and max_delay"""
-    new_list: List[float] = []
-    new_list2: List[float] = []
-
-    for i in range(n):
-        new_list.append(task_wait_random(max_delay))
-
-    for i in asyncio.as_completed(new_list):
-        num: float = await i
-        new_list2.append(num)
-
-    return new_list2
+    """Function that takes two numbers and executes n times
+    the wait_random function """
+    list_of_random_numbers: List[float] = []
+    for x in range(n):
+        list_of_random_numbers.append(await task_wait_random(max_delay))
+    return sorted(list_of_random_numbers)
