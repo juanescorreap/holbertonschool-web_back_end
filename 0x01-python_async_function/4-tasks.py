@@ -5,6 +5,7 @@ The code is nearly identical to wait_n except task_wait_random
 is being called
 """
 from typing import List
+import asyncio
 task_wait_random = __import__('3-tasks').task_wait_random
 
 
@@ -13,5 +14,5 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
     the wait_random function """
     list_of_random_numbers: List[float] = []
     for x in range(n):
-        list_of_random_numbers.append(await task_wait_random(max_delay))
+        list_of_random_numbers.append(asyncio.run(task_wait_random(max_delay)))
     return sorted(list_of_random_numbers)
