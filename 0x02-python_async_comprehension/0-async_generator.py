@@ -10,6 +10,8 @@ import random
 
 
 async def async_generator() -> float:
+    """Function that generates a random number
+    10 times after waiting 1 second each time"""
     for x in range(10):
         await asyncio.sleep(1)
         random_number = random.uniform(0, 10)
