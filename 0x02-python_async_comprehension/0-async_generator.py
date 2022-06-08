@@ -7,12 +7,12 @@ Use the random module.
 """
 import asyncio
 import random
+from typing import Generator
 
 
-async def async_generator() -> float:
+async def async_generator() -> Generator[float, None, None]:
     """Function that generates a random number
     10 times after waiting 1 second each time"""
     for x in range(10):
         await asyncio.sleep(1)
-        random_number = random.uniform(0, 10)
-    return random_number
+        yield random.uniform(0, 10)
