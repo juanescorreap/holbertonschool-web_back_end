@@ -11,6 +11,7 @@ class LIFOCache(BaseCaching):
     Class LIFOCache that inherits from
     BaseCaching and is a caching system
     """
+
     def __init__(self):
         super().__init__()
         self.record_of_keys = []
