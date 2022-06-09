@@ -15,13 +15,12 @@ class FIFOCache(BaseCaching):
     def put(self, key, item):
         if key is None or item is None:
             pass
-        elif len(self.cache_data) >= self.MAX_ITEMS:
+        self.cache_data[key] = item
+        if len(self.cache_data) > self.MAX_ITEMS:
             keys_list = list(self.cache_data)
             key_to_delte = keys_list[0]
-            print("DISCARD: {}".format(key_to_delte))
             del self.cache_data[key_to_delte]
-        else:
-            self.cache_data[key] = item
+            print("DISCARD: {}".format(key_to_delte))
 
     def get(self, key):
         if key is None or key not in self.cache_data:
