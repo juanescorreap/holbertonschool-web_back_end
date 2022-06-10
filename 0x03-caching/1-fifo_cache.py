@@ -18,7 +18,7 @@ class FIFOCache(BaseCaching):
         self.cache_data the item value for the key
         """
         if key is None or item is None:
-            pass
+            return
         self.cache_data[key] = item
         if len(self.cache_data) > self.MAX_ITEMS:
             keys_list = list(self.cache_data)
