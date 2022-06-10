@@ -22,7 +22,7 @@ class LIFOCache(BaseCaching):
         self.cache_data the item value for the key
         """
         if key is None or item is None:
-            pass
+            return
         self.cache_data[key] = item
         if len(self.cache_data) > self.MAX_ITEMS:
             key_to_delte = self.record_of_keys[len(self.record_of_keys) - 1]

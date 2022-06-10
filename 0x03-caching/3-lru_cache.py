@@ -22,7 +22,7 @@ class LRUCache(BaseCaching):
         self.cache_data the item value for the key
         """
         if key is None or item is None:
-            pass
+            return
         if len(self.cache_data) >= self.MAX_ITEMS:
             key_to_delte = self.record_of_keys.pop(0)
             del self.cache_data[key_to_delte]
