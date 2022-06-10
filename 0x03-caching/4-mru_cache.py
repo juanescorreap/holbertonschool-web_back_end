@@ -17,6 +17,10 @@ class MRUCache(BaseCaching):
         self.record_of_keys = []
 
     def put(self, key, item):
+        """
+        Method to assign to the dictionary
+        self.cache_data the item value for the key
+        """
         if key is None or item is None:
             pass
         self.cache_data[key] = item
@@ -27,6 +31,10 @@ class MRUCache(BaseCaching):
         self.record_of_keys.append(key)
 
     def get(self, key):
+        """
+        Method to return the value in
+        self.cache_data linked to key
+        """
         if key is None or key not in self.cache_data:
             return None
         else:
