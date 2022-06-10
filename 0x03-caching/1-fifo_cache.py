@@ -23,8 +23,8 @@ class FIFOCache(BaseCaching):
         if len(self.cache_data) > self.MAX_ITEMS:
             keys_list = list(self.cache_data)
             key_to_delte = keys_list[0]
-            print("DISCARD: {}".format(key_to_delte))
             del self.cache_data[key_to_delte]
+            print("DISCARD: {}".format(key_to_delte))
 
     def get(self, key):
         """
