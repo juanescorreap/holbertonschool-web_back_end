@@ -45,12 +45,12 @@ class Server:
         arguments (and defaults) as get_page and returns
         a dictionary containing the following key-value pairs
         """
-        assert type(index) is int and index >= 0 <= len(self.indexed_dataset())
-        assert type(page_size) is int and page_size > 0
+        assert type(index) == int and type(page_size) == int
+        assert 0 <= index < len(self.indexed_dataset())
         next_index = index + page_size
         data_list = []
         for i in range(index, index + page_size):
-            if not self.indexed_dataset.get(i):
+            if not self.indexed_dataset().get(i):
                 i = i + 1
                 next_index = next_index + 1
             data_list.append(self.indexed_dataset()[i])
