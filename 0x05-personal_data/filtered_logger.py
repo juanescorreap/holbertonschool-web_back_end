@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-
+Class containing methods to format personal data in a way that is safe
 """
 from typing import List
 import re
 import logging
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 
 
 class RedactingFormatter(logging.Formatter):
@@ -20,6 +21,10 @@ class RedactingFormatter(logging.Formatter):
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
+        """
+        Method to filter values in incoming log
+        records using filter_datum
+        """
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
@@ -34,3 +39,17 @@ def filter_datum(fields: List[str], redaction: str, message: str,
         message = re.sub(fr'{field}=.+?{separator}', f'{field}={redaction}{separator}',
                          message)
     return message
+
+
+def get_logger() -> logging.Logger:
+    """
+    Function that takes no arguments and returns a
+    logging.Logger object
+    """
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter(RedactingFormatter(PII_FIELDS)))
+    logger.addHandler(handler)
+    return logger
