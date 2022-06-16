@@ -6,6 +6,7 @@ which is a byte string.
 """
 import bcrypt
 
+
 def hash_password(password: str) -> bytes:
     """
     Function that expects one string argument name
@@ -13,6 +14,7 @@ def hash_password(password: str) -> bytes:
     which is a byte string.
     """
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
 
 def is_valid(hashed_password: bytes, password: str) -> bool:
     """
