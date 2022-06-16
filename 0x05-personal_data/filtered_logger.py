@@ -20,6 +20,7 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        "Class constructor"
         self.fields = fields
         super(RedactingFormatter, self).__init__(self.FORMAT)
 
@@ -39,7 +40,8 @@ def filter_datum(fields: List[str], redaction: str, message: str,
     message obfuscated
     """
     for field in fields:
-        message = re.sub(fr'{field}=.+?{separator}', f'{field}={redaction}{separator}',
+        message = re.sub(fr'{field}=.+?{separator}',
+                         f'{field}={redaction}{separator}',
                          message)
     return message
 
