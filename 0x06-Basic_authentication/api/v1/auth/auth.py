@@ -12,10 +12,18 @@ class Auth:
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
+        """
+        Checks whether the end point being
+        accessed requires authentication or not
+        """
         pass
 
     def authorization_header(self, request=None) -> str:
+        """
+        Validates all requests to secure the API
+        """
         pass
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """current_user method"""
         pass
