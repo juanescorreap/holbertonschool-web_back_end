@@ -16,7 +16,16 @@ class Auth:
         Checks whether the end point being
         accessed requires authentication or not
         """
-        pass
+        if path is None:
+            return True
+        if excluded_paths is None or not excluded_paths:
+            return None
+        if path[-1] != '/':
+            path = path + '/'
+        if path in excluded_paths:
+            return False
+        else:
+            return True
 
     def authorization_header(self, request=None) -> str:
         """
