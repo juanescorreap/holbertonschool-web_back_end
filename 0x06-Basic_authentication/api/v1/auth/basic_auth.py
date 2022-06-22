@@ -3,7 +3,7 @@
 Class to Class to manage basic API authentication
 """
 from api.v1.auth.auth import Auth
-from base64 import b64decode
+from base64 import b64decode, encode
 from typing import TypeVar
 from models.user import User
 
@@ -27,3 +27,20 @@ class BasicAuth(Auth):
             return None
         base_64 = authorization_header.split(' ')
         return base_64[1]
+
+    def decode_base64_authorization_header(
+            self, base64_authorization_header: str) -> str:
+        """
+        Returns the decoded value of a Base64 string
+        """
+        if base64_authorization_header is None:
+            return None
+        if type(base64_authorization_header) is not str:
+            return None
+        try:
+            encoded = base64_authorization_header.encode('utf-8')
+            decoded = b64decode(encoded)
+            decoded_base = decoded.decode('utf-8')
+            return decoded_base
+        except Exception:
+            return None
