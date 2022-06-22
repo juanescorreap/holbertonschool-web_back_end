@@ -3,7 +3,7 @@
 Class to Class to manage basic API authentication
 """
 from api.v1.auth.auth import Auth
-from base64 import b64decode, encode
+from base64 import b64decode
 from typing import TypeVar
 from models.user import User
 
@@ -44,3 +44,17 @@ class BasicAuth(Auth):
             return decoded_base
         except Exception:
             return None
+
+    def extract_user_credentials(
+            self, decoded_base64_authorization_header: str) -> (str, str):
+        """
+        Extracts the user credentials from the decoded str
+        """
+        if decoded_base64_authorization_header is None:
+            return None, None
+        if not isinstance(decoded_base64_authorization_header, str):
+            return None, None
+        if ':' not in decoded_base64_authorization_header:
+            return None, None
+        credentials = decoded_base64_authorization_header.split(':', 1)
+        return credentials[0], credentials[1]
