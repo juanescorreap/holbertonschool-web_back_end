@@ -30,10 +30,11 @@ def login() -> str:
             json_user.set_cookie(os.getenv('SESSION_NAME'), session_id)
             return json_user
         else:
-           return jsonify({"error": "wrong password"}), 401
+            return jsonify({"error": "wrong password"}), 401
 
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/auth_session/logout',
+                 methods=['DELETE'], strict_slashes=False)
 def logout() -> str:
     """
     Handles user logout endpoint
