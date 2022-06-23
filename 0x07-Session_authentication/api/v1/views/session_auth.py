@@ -30,7 +30,7 @@ def login() -> str:
             json_user.set_cookie(os.getenv('SESSION_NAME'), session_id)
             return json_user
         else:
-            jsonify({"error": "wrong password"}), 401
+           return jsonify({"error": "wrong password"}), 401
 
 
 @app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
@@ -43,4 +43,4 @@ def logout() -> str:
     if logout_request is False:
         abort(404)
     else:
-        jsonify({}), 200
+        return jsonify({}), 200
