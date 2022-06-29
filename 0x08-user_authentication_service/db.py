@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from typing import TypeVar
+
 from user import Base, User
 
 
@@ -13,7 +13,7 @@ class DB:
     """DB class
     """
 
-    def __init__(self) -> None:
+    def __init__(self):
         """Initialize a new DB instance
         """
         self._engine = create_engine("sqlite:///a.db", echo=True)
@@ -22,7 +22,7 @@ class DB:
         self.__session = None
 
     @property
-    def _session(self) -> Session:
+    def _session(self):
         """Memoized session object
         """
         if self.__session is None:
@@ -30,7 +30,7 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> TypeVar('User'):
+    def add_user(self, email: str, hashed_password: str) -> User:
         """
         Method that saves an user to the database
         """
