@@ -19,7 +19,7 @@ def message():
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
-def register_user():
+def users():
     """
     Method that registers a new user if it doesnt exist
     or returns a warning message if it does
