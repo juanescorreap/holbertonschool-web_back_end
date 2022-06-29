@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" Create user, Find user, Update user """
+"""DB module to create, find and update an user
+"""
 from sqlalchemy import create_engine
 from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.ext.declarative import declarative_base
@@ -10,9 +11,12 @@ from user import Base, User
 
 
 class DB:
-    """ class """
+    """DB class to manage the database
+    """
+
     def __init__(self):
-        """ constructor """
+        """Constructor to initialize a new DB instance
+        """
         self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
@@ -20,14 +24,18 @@ class DB:
 
     @property
     def _session(self):
-        """ create a session """
+        """Memoized session object
+            creates a new session
+        """
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
-        """ save the user to the database and returns a User object """
+        """
+        Method that saves an user to the database
+        """
         user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
