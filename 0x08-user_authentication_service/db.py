@@ -40,3 +40,16 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
+
+    def find_user_by(self, **kwargs: dict) -> User:
+        """
+        Takes in arbitrary keyword arguments and returns
+        the first row found in the users table as filtered
+        by the method's input arguments
+        """
+        if kwargs is None:
+            raise InvalidRequestError
+        query_result = self._session.query(User).filter_by(**kwargs).first()
+        if query_result is None:
+            raise NoResultFound
+        return query_result
