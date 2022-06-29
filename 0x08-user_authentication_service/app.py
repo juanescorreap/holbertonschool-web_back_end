@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=['GET'], strict_slashes=False)
-def retrurn_message():
+def message():
     """
     Method that returns a JSON welcome message
     """
