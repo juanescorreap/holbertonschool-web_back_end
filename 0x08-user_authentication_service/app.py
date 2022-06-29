@@ -20,11 +20,13 @@ def message():
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
-def register_user(email: str, password: str):
+def register_user():
     """
     Method that registers a new user if it doesnt exist
     or returns a warning message if it does
     """
+    email = request.form.get('email')
+    password = request.form.get('password')
     try:
         Auth.register_user(email, password)
         return jsonify({"email": email, "message": "user created"}), 200
