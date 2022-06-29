@@ -27,7 +27,8 @@ class Auth:
         """
         Method to register a new user in the database
         """
-        if self._db.find_user_by(email=email):
+        user = self._db.find_user_by(email=email)
+        if user:
             raise ValueError('User {email} already exists')
         hashed_password = _hash_password(password)
         registered_user = self._db.add_user(email, hashed_password)
