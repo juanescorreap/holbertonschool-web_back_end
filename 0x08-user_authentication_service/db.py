@@ -47,9 +47,4 @@ class DB:
         the first row found in the users table as filtered
         by the method's input arguments
         """
-        if kwargs is None:
-            raise InvalidRequestError
-        query_result = self._session.query(User).filter_by(**kwargs).first()
-        if query_result is None:
-            raise NoResultFound
-        return query_result
+        return self._session.query(User).filter_by(**kwargs).first()
