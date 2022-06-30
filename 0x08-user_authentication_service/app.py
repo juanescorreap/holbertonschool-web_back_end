@@ -36,9 +36,7 @@ def users():
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
     """
-    Method that validates login parameters
-    and creates a new session for the user
-    (logs in)
+    Method for login in
     """
     email = request.form.get('email')
     password = request.form.get('password')
