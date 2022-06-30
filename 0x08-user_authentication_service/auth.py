@@ -3,6 +3,7 @@
 Method that takes in a password string
 arguments and returns bytes
 """
+from xmlrpc.client import Boolean
 from db import DB
 import bcrypt
 from user import Base, User
@@ -36,3 +37,17 @@ class Auth:
             return registered_user
         else:
             raise ValueError
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """
+        Method that locates the user by email.
+        If the password matches returns True,
+        otherwise returns False.
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return False
+        else:
+            hashed_password = _hash_password(password)
+            return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
