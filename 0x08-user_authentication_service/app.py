@@ -2,6 +2,7 @@
 """
 Basic Flask app that has a single GET route
 """
+from crypt import methods
 from flask import Flask, jsonify, abort, request
 from auth import Auth
 
@@ -31,6 +32,23 @@ def users():
         return jsonify({"email": email, "message": "user created"}), 200
     except Exception:
         return jsonify({"message": "email already registered"}), 400
+
+
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
+def login() -> str:
+    """
+    Method that validates login parameters
+    and creates a new session for the user
+    (logs in)
+    """
+    email = request.form.get('email')
+    password = request.form.get('password')
+    if AUTH.valid_login(email, password) is False:
+        abort(401)
+    session_id = AUTH.create_session(email)
+    json_message = jsonify({"email": email, "message": "logged in"})
+    json_message.set_cookie('session_id', session_id)
+    return json_message
 
 
 if __name__ == "__main__":
