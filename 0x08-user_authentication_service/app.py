@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Basic Flask app that has a single GET route
+Module with the app's endpoints (routes)
 """
 from flask import Flask, jsonify, abort, request, redirect
 from auth import Auth
@@ -35,7 +35,11 @@ def users():
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
-    """ Log in """
+    """
+    Method that validates login parameters
+    and creates a new session for the user
+    (logs in)
+    """
     email = request.form.get('email')
     password = request.form.get('password')
     if AUTH.valid_login(email, password) is False:
@@ -48,7 +52,10 @@ def login():
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
-    """ Log out """
+    """
+    Method that destroys a user's session
+    in order to log out
+    """
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if session_id is None or user is None:
@@ -59,7 +66,9 @@ def logout():
 
 @app.route('/profile', methods=['GET'], strict_slashes=False)
 def profile():
-    """ User profile """
+    """
+    Method to retrieve a users profile
+    """
     session_id = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_id)
     if session_id is None or user is None:
@@ -69,7 +78,9 @@ def profile():
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token():
-    """ generate a token and respond with a 200 HTTP status """
+    """
+    Method to reset a user's password
+    """
     try:
         email = request.form.get('email')
         token = AUTH.get_reset_password_token(email)
@@ -80,7 +91,9 @@ def get_reset_password_token():
 
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def update_password():
-    """ Update password end-point """
+    """
+    Method to update a user's password
+    """
     email = request.form.get('email')
     token = request.form.get('reset_token')
     password = request.form.get('new_password')
