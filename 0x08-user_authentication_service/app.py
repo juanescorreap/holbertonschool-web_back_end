@@ -35,7 +35,7 @@ def users():
 
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
-def login() -> str:
+def login():
     """
     Method that validates login parameters
     and creates a new session for the user
