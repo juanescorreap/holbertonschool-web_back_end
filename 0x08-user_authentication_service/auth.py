@@ -3,6 +3,7 @@
 Method that takes in a password string
 arguments and returns bytes
 """
+from cmath import e
 from xmlrpc.client import Boolean
 from db import DB
 import bcrypt
@@ -59,3 +60,16 @@ class Auth:
         else:
             hashed_password = _hash_password(password)
             return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
+
+    def create_session(self, email: str) -> str:
+        """
+        Method that creates a user's session ID
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return None
+        else:
+            session_id = str(uuid.uuid4())
+            self._db.update_user(user.id, session_id=session_id)
+            return session_id
