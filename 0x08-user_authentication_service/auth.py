@@ -45,7 +45,7 @@ class Auth:
         otherwise returns False.
         """
         try:
-            user = self._db.find_user_by(email=email)
+            self._db.find_user_by(email=email)
         except NoResultFound:
             return False
         else:
