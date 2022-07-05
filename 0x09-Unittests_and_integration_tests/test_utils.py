@@ -9,7 +9,7 @@ from parameterized import parameterized
 
 class TestAccessNestedMap(unittest.TestCase):
     """
-    Class to test the functions in the utils module
+    Class to test the access_nested_map function
     """
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
@@ -35,3 +35,10 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(KeyError) as error:
             access_nested_map(nested_map, path)
         self.assertEqual(error.exception.args[0], path[-1])
+
+
+class TestGetJson(unittest.TestCase):
+    """
+    Class to test the get_json function
+    """
+    
