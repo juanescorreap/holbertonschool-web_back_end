@@ -5,6 +5,8 @@ Class to test the functions in the utils module
 import unittest
 from utils import *
 from parameterized import parameterized
+from unittest.mock import patch, Mock
+from unittest import TestCase, mock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -41,4 +43,18 @@ class TestGetJson(unittest.TestCase):
     """
     Class to test the get_json function
     """
-    
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    def test_get_json(self, test_url, test_payload):
+        """
+        Method to test the output of
+        test_get_json
+        """
+        mock_instance = Mock()
+        mock_instance.json.return_value = test_payload
+        with patch('requests.get', return_value=mock_instance):
+            response = get_json(test_url)
+            self.assertEqual(response, test_payload)
+            mock_instance.json.assert_called_once()
