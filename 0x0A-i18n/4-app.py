@@ -31,7 +31,7 @@ def main():
     Basic method to render
     the 0-index.html template
     """
-    return render_template('3-index.html')
+    return render_template('4-index.html')
 
 
 @babel.localeselector
@@ -39,6 +39,10 @@ def get_locale():
     """
     Method to select the best matching language
     """
+    locale = request.args.get('locale')
+    available_languages = app.config['LANGUAGES']
+    if locale in available_languages:
+        return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
