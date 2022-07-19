@@ -57,7 +57,7 @@ def replay(method: Callable):
     outputs = key + ":outputs"
     redis = method.__self__._redis
     counter = redis.get(key).decode("utf-8")
-    print("{} was called {} times".format(key, counter))
+    print("{} was called {} times:".format(key, counter))
     input_list = redis.lrange(inputs, 0, -1)
     output_list = redis.lrange(outputs, 0, -1)
     redis_zipped = list(zip(input_list, output_list))
