@@ -5,7 +5,7 @@ DELIMITER |
 CREATE FUNCTION SafeDiv ( a int, b int)
 RETURNS FLOAT
 BEGIN
-DECLARE answer FLOAT
+DECLARE answer FLOAT;
 IF b = 0 THEN
 SET answer = 0;
 ELSE
