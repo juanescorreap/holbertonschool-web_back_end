@@ -10,7 +10,7 @@ def method_requester(method_dict: dict) -> int:
     """
     Makes a request to the database
     """
-    client = MongoClient('https://s3.amazonaws.com/intranet-projects-files/holbertonschool-webstack/411/dump.zip')
+    client = MongoClient('mongodb://127.0.0.1:27017')
     logs = client.logs.nginx
     return logs.count_documents(method_dict)
 
