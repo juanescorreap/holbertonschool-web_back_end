@@ -7,7 +7,7 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
       const list = [];
       for (const value of values) {
         if (value.status === 'rejected') {
-          value.value = values.reason.toString().substring(0, 40);
+          value.value = value.reason.toString().substring(0, 40);
           delete value.reason;
         }
         list.push(value);
